@@ -1,10 +1,19 @@
+{% load static %}
+<link rel ="stylesheet" href="{% static 'style/main.css' %}">
+<body>
+
 <h1>Lista de Libros</h1>
-<a href="{% url 'crear_libro' %}">Nuevo Libro</a>
+<a href="{% url 'crear_libro' %}" class="btn-nuevo-libro">Nuevo Libro</a>
+
 <ul>
     {% for libro in object_list %}
-        <li>{{ libro.titulo }} - {{ libro.autor }}
-            <a href="{% url 'editar_libro' libro.pk %}">Editar</a>
-            <a href="{% url 'eliminar_libro' libro.pk %}">Eliminar</a>
+        <li style="display: flex; align-items: center; justify-content: space-between;">
+            <span>{{ libro.titulo }} - {{ libro.autor }}</span>
+            <span>
+                <a href="{% url 'editar_libro' libro.pk %}" class="btn-editar-libro btn-libro">Editar</a>
+                <a href="{% url 'eliminar_libro' libro.pk %}" class="btn-eliminar-libro btn-libro">Eliminar</a>
+            </span>
         </li>
     {% endfor %}
 </ul>
+</body>
