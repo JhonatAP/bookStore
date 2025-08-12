@@ -1,53 +1,14 @@
-<h1>{{ view.object.pk|yesno:"Editar Libro,Nuevo Libro" }}</h1>
-<form method="post">
+{% extends 'libros/base.html' %}
+
+{% block title %}{% if view.object.pk %}Editar Libro{% else %}Nuevo Libro{% endif %}{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">{% if view.object.pk %}Editar Libro{% else %}Nuevo Libro{% endif %}</h1>
+
+<form method="post" class="card p-4 shadow-sm bg-white">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Guardar</button>
+    <button type="submit" class="btn btn-success">💾 Guardar</button>
+    <a href="{% url 'lista_libros' %}" class="btn btn-secondary">↩ Volver</a>
 </form>
-<a href="{% url 'lista_libros' %}">Volver</a>
-
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background: #f7f7f7;
-        margin: 0;
-        padding: 0;
-    }
-    h1 {
-        text-align: center;
-        color: #333;
-        margin-top: 30px;
-    }
-    form {
-        background: #fff;
-        max-width: 400px;
-        margin: 30px auto;
-        padding: 25px 30px;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-    button[type="submit"] {
-        background: #4CAF50;
-        color: #fff;
-        border: none;
-        padding: 10px 22px;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 16px;
-        margin-top: 10px;
-    }
-    button[type="submit"]:hover {
-        background: #388e3c;
-    }
-    a {
-        display: block;
-        text-align: center;
-        margin: 20px auto;
-        color: #1976d2;
-        text-decoration: none;
-        font-weight: bold;
-    }
-    a:hover {
-        text-decoration: underline;
-    }
-</style>
+{% endblock %}
